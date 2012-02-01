@@ -1,0 +1,17 @@
+<%= render 'common_js' %>
+
+<script type="text/javascript">
+  function linkedInLoad() {
+    IN.API.Raw("/companies::(162479,1035,1337)").result(function(result) {
+      // window.console.log(result);
+      $('#companies').html('');
+      result.values.forEach(function(company) {
+        $('#companies').append(company.id + ' - ' + company.name + '<br />');
+      });
+    });
+  }
+</script>
+
+<h1>LinkedIn JSAPI Test</h1>
+
+<div id="companies">loading companies...</div>

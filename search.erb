@@ -1,0 +1,29 @@
+<%= render 'common_js' %>
+
+<script type="text/javascript">
+  jQuery(function() {
+    $('#search').keyup(function(e) {
+      IN.API.Raw(
+        "/company-search:(companies:(id,name,universal-name))?keywords=" 
+        + escape($(this).val())
+      ).result(function(result) {
+        //window.console.log(result);
+
+        $('#results').html('');
+        result.companies.values.forEach(function(company) {
+          $('#results').append(company.id+' - '+company.name+' - '+company.universalName+'<br />');
+        });
+      });
+    });
+  });
+
+  function linkedInLoad() {
+    $('#search').show();
+  }
+</script>
+
+<h1>LinkedIn JSAPI Test</h1>
+
+<input type="text" id="search" style="display: none;" />
+
+<div id="results"></div>
